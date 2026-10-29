@@ -1,0 +1,44 @@
+{
+  "name": "dsh-pptx-anim",
+  "version": "0.1.0",
+  "description": "给 .pptx 批量注入真正的 PowerPoint 进入动画与幻灯片切换 —— 补 python-pptx 没有动画 API 的缺口",
+  "author": "ZSX-114514",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "scripts",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "pptx",
+    "powerpoint",
+    "animation",
+    "office"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZSX-114514/dsh-pptx-anim.git"
+  },
+  "homepage": "https://github.com/ZSX-114514/dsh-pptx-anim#readme",
+  "bugs": {
+    "url": "https://github.com/ZSX-114514/dsh-pptx-anim/issues"
+  },
+  "license": "MIT"
+}

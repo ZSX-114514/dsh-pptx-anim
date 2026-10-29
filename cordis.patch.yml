@@ -1,0 +1,5 @@
+# dsh-pptx-anim：Host-only 插件，注册 3 个工具。
+# 装载时优先使用已安装包名；本地开发可用 profile patch 指向 lib/index.js。
+- insert:
+    - id: pptx-anim
+      name: dsh-pptx-anim
