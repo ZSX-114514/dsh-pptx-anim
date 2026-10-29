@@ -3,3 +3,7 @@ node_modules/
 .DS_Store
 __pycache__/
 *.pyc
+
+# build artifacts
+*.tgz
+SHA256SUMS.txt
