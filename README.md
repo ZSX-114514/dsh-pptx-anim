@@ -100,6 +100,55 @@ p:timing → p:tnLst → p:par(tmRoot) → p:seq(mainSeq)
                                             └ presetClass="entr" + p:set + p:animEffect
 ```
 
+## 安装
+
+### 前置
+
+- **Node.js ≥ 20**（DSH 自带）
+- **Python 3 且能 `import pptx`**（`pip install python-pptx`）
+  - 工具会自动在 `python` / `python3` / `py` 里找；都不行时用工具参数 `python` 指定绝对路径，
+    或设环境变量 `DSH_PPTX_ANIM_PYTHON`
+  - 找不到时工具会**明确报错并列出尝试过的解释器**，不会静默失败
+
+### 方式 A：本地挂载（自用 / 开发，已在 DSH 0.2.1 桌面版验证）
+
+1. 克隆或复制本仓库到 DSH profile 的 `plugins/` 下：
+
+   ```
+   ~/.dsh/profiles/<profile>/plugins/dsh-pptx-anim/
+   ```
+
+2. 在该 profile 的 `cordis.patch.yml` 末尾追加：
+
+   ```yaml
+   - insert:
+       - id: pptx-anim
+         name: ./plugins/dsh-pptx-anim/lib/index.js
+   ```
+
+3. **重启 DSH**（Host 半改动必须重启），确认工具已加载（让 agent 调用 `pptx_anim_env`，
+   或看工具列表里有没有 `pptx_animate`）。
+
+### 方式 B：作为 bundle 安装
+
+本仓库自带 `cordis.patch.yml`（声明了 `dsh.bundle.patch`），包被装进 profile 后会自动挂 row：
+
+```bash
+dsh plugin --profile <profile> add dsh-pptx-anim          # 从 npm
+dsh plugin --profile <profile> add file:<本地目录或 tgz>   # 从本地
+```
+
+> 以**本地目录**方式安装时，包目录是符号链接。本插件只有 Host 半（无客户端模块），
+> 符号链接不影响加载；含客户端 UI 的插件不要用这种方式。
+
+### 安装后自检
+
+```
+pptx_anim_env({})                                  → 应返回一个可用的 Python
+pptx_animate({ input: "<任一 .pptx 的绝对路径>" })   → 生成 <原名>_anim.pptx
+pptx_anim_validate({ input: "<原名>_anim.pptx" })    → 应显示「结构校验通过」
+```
+
 ## License
 
 MIT
